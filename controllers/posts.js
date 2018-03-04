@@ -12,7 +12,7 @@ module.exports = {
      * add new post to posts
      */ 
     addPost(req, res) {
-        let post = whitelist(req.body) 
+        let post = whitelistPost(req.body) 
         let id = data.posts.length
         // add empty comments array to new post
         post.comments = []
@@ -29,7 +29,7 @@ module.exports = {
      * update a single post
      */ 
     updatePost(req, res) {
-        data.posts[req.params.id] = whitelist(req.body) 
+        data.posts[req.params.id] = whitelistPost(req.body) 
         res.status(200).send(data.posts[req.params.id])
     },
 
@@ -46,7 +46,7 @@ module.exports = {
   /*
    * get request and whitelist post data
    */ 
-  whitelist = (post) => {
+  whitelistPost = (post) => {
     return {
         name : post.name,
         url : post.url,

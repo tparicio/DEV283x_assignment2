@@ -6,7 +6,6 @@ module.exports = {
      */
     getComments(req, res) {
       let post = data.posts[req.params.id]
-      console.log(req.params.id, post)
       res.status(200).send(post.comments)
     }, 
 
@@ -15,7 +14,7 @@ module.exports = {
      */ 
     addComment(req, res) {
       let post = data.posts[req.params.id]
-      let comment = whitelist(req.body) 
+      let comment = whitelistComment(req.body) 
       let id = post.comments.length
       // add post into posts
       data.posts[req.params.id].comments.push(comment)
@@ -28,7 +27,7 @@ module.exports = {
      */ 
     updateComment(req, res) {
       let post = data.posts[req.params.id]
-      post.comments[req.params.id] = whitelist(req.body) 
+      post.comments[req.params.id] = whitelistComment(req.body) 
       res.status(200).send(post.comments[req.params.comment])
     },
 
@@ -45,7 +44,7 @@ module.exports = {
     /*
    * get request and whitelist post data
    */ 
-  whitelist = (comment) => {
+  whitelistComment = (comment) => {
     return {
         text : comment.text
     }
